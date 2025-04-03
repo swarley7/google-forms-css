@@ -7,7 +7,7 @@
 
 // Function to extract json form object
 function getForm(indata) {
-  var rx = /var FB_PUBLIC_LOAD_DATA_ =(.*\d\]);\n?<\/script>/g;
+  var rx = /var FB_PUBLIC_LOAD_DATA_ =(.*);\n?<\/script>/g;
   var arr = rx.exec(indata);
   return arr[1]; 
 }
