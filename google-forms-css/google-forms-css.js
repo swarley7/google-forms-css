@@ -5,6 +5,14 @@
 
 */
 
+// Function to extract json form object
+function getForm(indata) {
+  var rx = /var FB_PUBLIC_LOAD_DATA_ =(.*\d\]);\n?<\/script>/g;
+  var arr = rx.exec(indata);
+  return arr[1]; 
+}
+
+
 var googleFormsCSS = function(params) {
 
   // jquery
@@ -29,14 +37,7 @@ var googleFormsCSS = function(params) {
     //
 
     // form data
-    var needle = 'var FB_PUBLIC_LOAD_DATA_ = ';
-    var start = data.indexOf(needle);
-    if (start === -1) {
-      console.error('google-forms-css > form data not found');
-      return;
-    }
-    var end = data.indexOf(';', start);
-    var json = data.substring(start + needle.length, end);
+    var json = getForm(data)
     var formData = JSON.parse(json);
 
     // items
